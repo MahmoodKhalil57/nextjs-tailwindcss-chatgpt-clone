@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { FiSend } from "react-icons/fi";
 import { BsChevronDown, BsPlusLg } from "react-icons/bs";
 import { RxHamburgerMenu } from "react-icons/rx";
-import useAnalytics from "@/hooks/useAnalytics";
+// import useAnalytics from "@/hooks/useAnalytics";
 import useAutoResizeTextArea from "@/hooks/useAutoResizeTextArea";
 import Message from "./Message";
 import { DEFAULT_OPENAI_MODEL } from "@/shared/Constants";
@@ -15,7 +15,7 @@ const Chat = (props: any) => {
   const [showEmptyChat, setShowEmptyChat] = useState(true);
   const [conversation, setConversation] = useState<any[]>([]);
   const [message, setMessage] = useState("");
-  const { trackEvent } = useAnalytics();
+  // const { trackEvent } = useAnalytics();
   const textAreaRef = useAutoResizeTextArea();
   const bottomOfChatRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +45,7 @@ const Chat = (props: any) => {
       setErrorMessage("");
     }
 
-    trackEvent("send.message", { message: message });
+    // trackEvent("send.message", { message: message });
     setIsLoading(true);
 
     // Add the message to the conversation
