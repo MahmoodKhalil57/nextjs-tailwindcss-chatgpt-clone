@@ -1,12 +1,13 @@
 import React from "react";
 import { IoMdClose } from "react-icons/io";
 import Sidebar from "./Sidebar";
+import { Signal } from "@preact/signals-react";
 
-const MobileSiderbar = (props: any) => {
-  const { toggleComponentVisibility } = props;
 
+const MobileSiderbar = (props: { mobileSidebarVisible: Signal<Boolean> }) => {
+  const { mobileSidebarVisible } = props;
   return (
-    <div id="headlessui-portal-root display:hidden">
+    <div id="headlessui-portal-root display:hidden" className={mobileSidebarVisible.value ? '' : 'hidden'}>
       <div data-headlessui-portal="">
         <button
           type="button"
@@ -33,7 +34,9 @@ const MobileSiderbar = (props: any) => {
                     type="button"
                     className="ml-1 flex h-10 w-10 items-center justify-center focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                     tabIndex={0}
-                    onClick={toggleComponentVisibility}
+                    onClick={() => {
+                      mobileSidebarVisible.value = !mobileSidebarVisible.value
+                    }}
                   >
                     <span className="sr-only">Close sidebar</span>
                     <IoMdClose className="h-6 w-6 text-white" />
@@ -51,7 +54,7 @@ const MobileSiderbar = (props: any) => {
           className="fixed top-[1px] left-[1px] w-[1px] h-0 p-0 m-[-1px] overflow-hidden whitespace-nowrap border-0"
         ></button>
       </div>
-    </div>
+    </div >
   );
 };
 

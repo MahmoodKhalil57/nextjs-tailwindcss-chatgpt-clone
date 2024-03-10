@@ -6,9 +6,10 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import useAutoResizeTextArea from "@/hooks/useAutoResizeTextArea";
 import Message from "./Message";
 import { DEFAULT_OPENAI_MODEL } from "@/shared/Constants";
+import { Signal } from "@preact/signals-react";
 
-const Chat = (props: any) => {
-  const { toggleComponentVisibility } = props;
+const Chat = (props: { mobileSidebarVisible: Signal<Boolean> }) => {
+  const { mobileSidebarVisible } = props;
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -108,7 +109,7 @@ const Chat = (props: any) => {
         <button
           type="button"
           className="-ml-0.5 -mt-0.5 inline-flex h-10 w-10 items-center justify-center rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white dark:hover:text-white"
-          onClick={toggleComponentVisibility}
+          onClick={() => { mobileSidebarVisible.value = !mobileSidebarVisible.value }}
         >
           <span className="sr-only">Open sidebar</span>
           <RxHamburgerMenu className="h-6 w-6 text-white" />
